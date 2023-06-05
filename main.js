@@ -30,4 +30,18 @@ function test1(){
         },i*1000);
     }
 }
-test1();
+//test1();
+
+// the above problem can be solve when we need to use var for sure ....with the help of closure
+
+function test2(){
+    for(var i =1;i<=5;i++){
+        function close(x){
+            setTimeout(function (){
+                console.log(x)
+            },x*1000)
+        }
+        close(i);
+    }
+}
+test2();
