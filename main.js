@@ -2,12 +2,14 @@
 let name = {
     firstname:'Rana',
     lastname:'singh',
-    printFullName:function(){
-        console.log(this.firstname+" "+this.lastname);
-    }
-  
 }
-name.printFullName();
+
+// Best practice when we have to use any particular function on repeated basis
+//we need to keep function outside of 
+let printFullName = function(){
+    console.log(this.firstname+" "+this.lastname);
+}
+printFullName.call(name);
 
 let name2 = {
     firstname:"Mahendra Singh",
@@ -15,5 +17,4 @@ let name2 = {
 }
 
 //function borrowing
-name.printFullName.call(name2);
-//here this will point to name2 object which we have passed as parameter
+printFullName.call(name2);
