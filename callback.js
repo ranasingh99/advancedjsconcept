@@ -15,10 +15,30 @@ function planatrip(){
         },1000)
     })
 }
-async function fun1(){
-    const msg1 = await buyacar();
-console.log(msg1);
-const msg2 = await planatrip();
-console.log(msg2);
+function gotofamousmountain(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            reject('some accident happend');
+        },1000);
+    })
 }
+
+
+    async function fun1(){
+        try{
+            const msg1 = await buyacar();
+            console.log(msg1);
+            const msg2 = await planatrip();
+            console.log(msg2);
+            const msg3 = await gotofamousmountain();
+        }
+        catch(error){
+            console.log(error);
+        }
+     
+
+    }
+
+
+
 fun1();
