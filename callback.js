@@ -1,44 +1,80 @@
-// asyn await
-// the promise hell further can be rsolve by the use of async await
-
-function buyacar(){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve(' bought a car maecedes-benz')
-        },2000)
+const posts = [{ title: 'POST1' }];
+//Do not touch this function
+function create2ndPost() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            posts.push({ title: 'POST2' });
+            resolve()
+        }, 3000)
     })
 }
-function planatrip(){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve('lets go to manali')
-        },1000)
-    })
-}
-function gotofamousmountain(){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            reject('some accident happend');
-        },1000);
+//Do not touch this function
+function create3rPost() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            posts.push({ title: 'POST3' });
+            resolve();
+        }, 2000)
     })
 }
 
+//Do not touch this function
+function deletePost() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (posts.length > 0) {
+                const poppedElement = posts.pop();
+                resolve(poppedElement);
+            } else {
+                reject("ERROR: ARRAY IS EMPTY")
+            }
+        }, 1000)
+    })
+}
 
-    async function fun1(){
-        try{
-            const msg1 = await buyacar();
-            console.log(msg1);
-            const msg2 = await planatrip();
-            console.log(msg2);
-            const msg3 = await gotofamousmountain();
+//Modify the lines below and use .then and .catch smartly to get the correct output.
+
+
+create2ndPost()
+
+    .then(() => {
+
+        deletePost().then((deletedPost1) => {
+
+            console.log(deletedPost1.title)
+
+            create3rPost()
+
+                .then(() => {
+
+                    deletePost().then((deletedpost2) => {
+
+                        console.log(deletedpost2.title)
+
+                        deletePost().then((deletedpost3) => {
+
+                            console.log(deletedpost3.title)
+
+                            deletePost().catch((msg) => console.log(msg))
+
+                        })
+
+                    })
+
+                })
+
+        })
+
+    })
+//----------------------------------------
+return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        if(blogs.length>0){
+            const popedElement = blogs.pop();
+            resolve(poppedElement);
         }
-        catch(error){
-            console.log(error);
+        else{
+            reject("ERROR: ARRAY IS EMPTY");
         }
-     
-
-    }
-
-
-
-fun1();
+    })
+})
