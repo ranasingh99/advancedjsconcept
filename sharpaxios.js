@@ -36,20 +36,39 @@ function addTodo() {
   })
  
 }
-
+//Note -> put will completely replace the record while patch will update specific record
 // PUT/PATCH REQUEST
 function updateTodo() {
   console.log('PUT/PATCH Request');
+  axios.put("https://jsonplaceholder.typicode.com/todos/1",{title:'updated todos',completed:true})
+  .then((res)=>showOutput(res))
+  .catch(error=>console.log(error))
 }
 
 // DELETE REQUEST
 function removeTodo() {
   console.log('DELETE Request');
+  axios.delete("https://jsonplaceholder.typicode.com/todos/1",{title:'updated todos',completed:true})
+  .then((res)=>showOutput(res))
+  .catch(error=>console.log(error))
 }
 
 // SIMULTANEOUS DATA
 function getData() {
   console.log('Simultaneous Request');
+  axios
+  .all(
+    [axios.get('https://jsonplaceholder.typicode.com/todos'),
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    ]
+  )
+//   .then((res)=>{
+//     console.log(res[0])
+//     console.log(res[1])
+//     showOutput(res[0])
+//   })
+.then(axios.spread((todos,posts)=>showOutput(todos)))
+.catch((error)=>console.log(error))
 }
 
 // CUSTOM HEADERS
